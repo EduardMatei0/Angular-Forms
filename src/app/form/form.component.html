@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form (ngSubmit)="submit(f.value)" #f="ngForm" class="form">
+                <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input
+                    type="email" 
+                    id="email" 
+                    class="form-control"
+                    ngModel
+                    name="email"
+                    required
+                    email
+                    #email="ngModel">
+                    <span *ngIf="!email.valid && email.touched" class="help-block">Please enter a valid email!</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="subscription">Subscription</label>
+                    <select 
+                      id="subscription" 
+                      class="form-control"
+                      [ngModel]="'Advanced'"
+                      name="subscription">
+                      <option value="Basic">Basic</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Pro">Pro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                      type="password" 
+                      id="password" 
+                      class="form-control"
+                      ngModel
+                      name="password"
+                      #password="ngModel"
+                      required>
+                    <span *ngIf="!password.valid && password.touched" class="help-block">Please enter a valid password!</span>
+                </div>
+                <button 
+                    class="btn btn-primary" 
+                    type="submit"
+                    [disabled]="!f.valid">Submit</button>
+                <p *ngIf="f.invalid && f.touched">Form is invalid</p>
+            </form>
+
+            <hr>
+            <div class="row" *ngIf="submitted">
+                <div class="col-xs-12">
+                <h3>Your Data</h3>
+                <p>Mail: {{ formData.email }}</p>
+                <p>Subscription: {{ formData.subscription }} </p>
+                <p>Password: {{ formData.password }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
